@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de QR Code</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-family: arial, helvetica;
+        }
+
+        #qrcode {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            display: inline-block;
+        }
+
+        #generateButton {
+            background: linear-gradient(to right, rgb(21, 141, 200), rgb(65, 182, 255));
+            color: #fff; /* Cor do texto */
+            padding: 5px 10px; /* Ajuste o tamanho do botão conforme necessário */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease-in-out; /* Efeito de transição suave ao passar o mouse */
+        }
+        
+        #generateButton:hover {
+            background: linear-gradient(to right, rgb(65, 182, 255), rgb(21, 141, 200)); /* Altera as cores no hover */
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code</h1>
+        <div id="qrcode"></div>
+        <br><br>
+        <button id="generateButton">Atualizar QR Code</button>
+    </div>
+
+    <script>
+        // script.js
+        const qrcodeDiv = document.getElementById('qrcode');
+        const generateButton = document.getElementById('generateButton');
+
+        // Função para gerar QR code com texto aleatório
+        function generateRandomQRCode() {
+            const randomNumber = Math.floor(Math.random() * 999999999999) + 1; // Número aleatório de 1 a 99999999999
+            const randomText = `#${randomNumber.toString().padStart(2, '0')}`;
+            qrcodeDiv.innerHTML = ''; // Limpa qualquer QR Code anterior
+            const qrcode = new QRCode(qrcodeDiv, {
+                text: randomText,
+                width: 128,
+                height: 128
+            });
+        }
+
+        // Gerar QR code ao clicar no botão
+        generateButton.addEventListener('click', generateRandomQRCode);
+
+        // Gerar QR code automaticamente na inicialização
+        generateRandomQRCode();
+
+    </script>
+</body>
+</html>
